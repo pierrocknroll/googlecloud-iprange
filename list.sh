@@ -7,7 +7,7 @@ get_gcp_ip_ranges() {
         include:*)
           get_gcp_ip_ranges "${line#*:}"
           ;;
-        ip4:*)
+        ip[46]:*)
           echo "${line#*:}"
           ;;
       esac
