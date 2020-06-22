@@ -1,17 +1,14 @@
 #!/bin/bash
 
-get_gcp_ip_ranges() {
-  dig @8.8.8.8 +short txt "$1" | tr ' ' '\n' |
-    while read -r line; do
-      case "$line" in
-        include:*)
-          get_gcp_ip_ranges "${line#*:}"
-          ;;
-        ip[46]:*)
-          echo "${line#*:}"
-          ;;
-      esac
-  done
-}
+if ! command -v jq > /dev/null 2>&1; then
+  echo jq is not available
+  exit 1
+fi
+if ! command -v curl > /dev/null 2>&1; then
+  echo curl is not available
+  exit 1
+fi
 
-get_gcp_ip_ranges "_cloud-netblocks.googleusercontent.com"
+curl -s https://www.gstatic.com/ipranges/cloud.json | jq '.prefixes[] | [.ipv4Prefix, .ipv6Prefix][] | select(. != null)' -r
+curl -s https://www.gstatic.com/ipranges/goog.txt
+
