@@ -2,7 +2,9 @@
 
 List all IP ranges from Google Cloud Platform.
 
-You can execute the bash script or grab directly the list (contains IPv4 and IPv6 entries) : https://raw.githubusercontent.com/pierrocknroll/googlecloud-iprange/master/list.txt
+You can execute the bash script with something like `./list.sh | sort -n | uniq`
+
+or grab directly the list (contains IPv4 and IPv6 entries) : https://raw.githubusercontent.com/pierrocknroll/googlecloud-iprange/master/list.txt
 
 For only IPv4 entries : https://raw.githubusercontent.com/pierrocknroll/googlecloud-iprange/master/list_ipv4.txt
 
